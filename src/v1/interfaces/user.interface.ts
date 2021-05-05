@@ -3,5 +3,5 @@ export default interface User {
     type: String,
     email: String,
     name: String,
-    password: String,
+    password: String
 }

@@ -11,10 +11,17 @@ export class UsersService {
       name: 'Alisson Rodrigues',
       email: 'alisson@hotmail.com',
       password: '123456'
+    },
+    {
+      id: 2,
+      type: 'explorador',
+      name: 'Alisson Rodrigues',
+      email: 'explorador@hotmail.com',
+      password: '123456'
     }
   ];
 
-  async findOne(email: string): Promise<User | undefined> {
-    return this.users.find(user => user.email === email);
+  async getValidUser(email: string, type:string): Promise<User | undefined> {
+    return this.users.find(user => user.email === email && user.type === type);
   }
 }

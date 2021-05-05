@@ -1,17 +1,18 @@
-import { Controller, Get, Post, Req, SetMetadata } from '@nestjs/common';
+import { Controller, Get, Post, Req, SetMetadata, UseGuards } from '@nestjs/common';
+import { AuthGuard } from './common/guards/auth.guard'
 import { Request } from 'express';
 import { AppService } from './app.service';
 import { Roles } from './common/decorators/roles.decorator';
 import { Role } from './common/enums/role.enum';
 
+@UseGuards(AuthGuard)
 @Controller('v1')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Roles(Role.Aventureiro)
-  @Get('/')
+  @Post('/')
+  @Roles(Role.Explorador)
   getStatus(@Req() request: Request): Object {
-    console.log(request)
     return {'status': 'it\'s working'};
   }
 }
