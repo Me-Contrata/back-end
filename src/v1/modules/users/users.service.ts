@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import User from './../../interfaces/user.interface'
+import User from './dto/user.dto'
 
 @Injectable()
 export class UsersService {
@@ -21,7 +21,11 @@ export class UsersService {
     }
   ];
 
-  async getValidUser(email: string, type:string): Promise<User | undefined> {
+  async getValidUser(email: string, type:string): Promise<User | null> {
     return this.users.find(user => user.email === email && user.type === type);
+  }
+
+  async findOne(email:string): Promise<User|null> {
+    return this.users.find(us => us.email === email);
   }
 }
