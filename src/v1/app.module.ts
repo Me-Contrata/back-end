@@ -12,7 +12,7 @@ import { ProjectsService } from './modules/projects/projects.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [ TypeOrmModule.forRoot() ,UsersModule, AuthorizationModule, AuthenticationModule, ProjectsModule],
+  imports: [ TypeOrmModule.forRoot(),UsersModule, AuthorizationModule, AuthenticationModule, ProjectsModule],
   controllers: [AppController, AuthenticationController, ProjectsController],
   providers: [AppService, AuthenticationService, ProjectsService]
 })
