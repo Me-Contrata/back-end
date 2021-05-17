@@ -9,9 +9,10 @@ import { AuthenticationService } from './modules/authentication/authentication.s
 import { ProjectsController } from './modules/projects/projects.controller';
 import { ProjectsModule } from './modules/projects/projects.module';
 import { ProjectsService } from './modules/projects/projects.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [UsersModule, AuthorizationModule, AuthenticationModule, ProjectsModule],
+  imports: [ TypeOrmModule.forRoot() ,UsersModule, AuthorizationModule, AuthenticationModule, ProjectsModule],
   controllers: [AppController, AuthenticationController, ProjectsController],
   providers: [AppService, AuthenticationService, ProjectsService]
 })
