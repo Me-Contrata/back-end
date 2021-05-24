@@ -4,8 +4,9 @@
     "port": 5432,
     "username": "postgres",
     "password": "12345",
+    "logging": true,
     "database": "me_contrata",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "entities": ["dist/**/*.entity.js"],
     "synchronize": true,
     "ConnectionOptions": []
   }

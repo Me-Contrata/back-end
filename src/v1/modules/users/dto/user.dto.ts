@@ -1,7 +1,7 @@
-export default interface User {
-    id?: Number,
-    type?: String,
-    email: String,
-    name?: String,
-    password: String
+export  class UserDTO {
+    id?: Number;
+    type?: String;
+    email: String;
+    name?: String;
+    password: String;
 }
