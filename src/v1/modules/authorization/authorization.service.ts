@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { Reflector } from '@nestjs/core';
-import User from '../users/dto/user.dto';
+import {UserDto} from '../users/dto/user.dto';
 
 
 @Injectable()

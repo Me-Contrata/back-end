@@ -1,4 +1,4 @@
-import {LoginPayload} from './dto/LoginPayload';
+import {LoginPayload} from './dto/login-payload.dto';
 import { Injectable } from '@nestjs/common';
 import {UsersService} from '../users/users.service'
 
