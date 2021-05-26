@@ -1,8 +1,8 @@
 import { IsNotEmpty, Equals } from "class-validator";
 import {Match} from '../../../common/decorators/validation.decorator'
 import { User } from "../user.entity";
-
-export class UserDto extends User{
+import { Exclude, Expose } from 'class-transformer';
+export class UserDto {
     @IsNotEmpty()
     name: string;
 

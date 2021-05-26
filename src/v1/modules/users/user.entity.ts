@@ -1,9 +1,14 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
 import {Project} from '../projects/projects.entity';
+import { UserDto } from './dto/user.dto';
 
 @Entity()
 @Unique(['email'])
 export class User {
+
+  constructor(partial: Partial<UserDto>) {
+    Object.assign(this, partial);
+  }
   
   @PrimaryGeneratedColumn()
   id: number;

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { LoginPayload } from '../authentication/dto/login-payload.dto';
 import { User } from '../users/user.entity';
+import { UserDto } from './dto/user.dto';
 import UserRepository from './user.repository';
 
 @Injectable()
@@ -14,8 +15,8 @@ export class UsersService {
     return this.userRepository.findOne(userLogin);
   }
 
-  async create(user:User):Promise<User> {
-    return this.userRepository.save(user);
+  async create(userDto:UserDto):Promise<User> {
+    return this.userRepository.save(new User(userDto));
   }
 
 }
