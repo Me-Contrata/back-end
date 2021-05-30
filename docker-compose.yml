@@ -9,3 +9,11 @@ services:
         - /var/lib/postgres/data:/var/lib/postgresql/data
       ports: 
         - 5432:5432
+    api:  
+      build: .
+      ports: 
+        - 3000:3000
+      links:
+        - "db:database"
+      depends_on: 
+        - db

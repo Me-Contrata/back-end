@@ -16,7 +16,11 @@ export class UsersService {
   }
 
   async create(userDto:UserDto):Promise<User> {
-    return this.userRepository.save(new User(userDto));
+    try {
+      return this.userRepository.save(new User(userDto));
+    }catch (error) {
+      console.log(error);
+    }
   }
 
 }
