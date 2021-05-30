@@ -1,13 +1,19 @@
-import { Controller, Body, Post } from '@nestjs/common';
+import { Controller, Body, Post, NotFoundException } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
-import {UserPayload} from './dto/UserPayload';
+import {LoginPayload} from './dto/login-payload.dto';
 
 @Controller()
 export class AuthenticationController {
     constructor(private readonly authService: AuthenticationService) {}
 
     @Post('/login')
-    login(@Body() UserPayload:UserPayload) {
-        return this.authService.findOne(UserPayload);
+    async login(@Body() UserPayload:LoginPayload) {
+        let user = await this.authService.login(UserPayload);
+
+        if(!user) {
+            throw new NotFoundException('user not found');
+        }
+
+        return user;
     }
 }

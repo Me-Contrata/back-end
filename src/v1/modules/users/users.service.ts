@@ -1,31 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import User from './dto/user.dto'
+import { LoginPayload } from '../authentication/dto/login-payload.dto';
+import { User } from '../users/user.entity';
+import { UserDto } from './dto/user.dto';
+import UserRepository from './user.repository';
 
 @Injectable()
 export class UsersService {
-      // temp json while database is not implemented
-  private readonly users: Array<User> = [
-    {
-      id: 1,
-      type: 'aventureiro',
-      name: 'Alisson Rodrigues',
-      email: 'alisson@hotmail.com',
-      password: '123456'
-    },
-    {
-      id: 2,
-      type: 'explorador',
-      name: 'Alisson Rodrigues',
-      email: 'explorador@hotmail.com',
-      password: '123456'
+
+  constructor(private userRepository:UserRepository){}
+
+  async getEmailAndPassword(userLogin:LoginPayload): Promise<User|null> {
+    //@TODO: remove static definition of status
+    userLogin.is_active = true;
+    return this.userRepository.findOne(userLogin);
+  }
+
+  async create(userDto:UserDto):Promise<User> {
+    try {
+      return this.userRepository.save(new User(userDto));
+    }catch (error) {
+      console.log(error);
     }
-  ];
-
-  async getValidUser(email: string, type:string): Promise<User | null> {
-    return this.users.find(user => user.email === email && user.type === type);
   }
 
-  async findOne(email:string): Promise<User|null> {
-    return this.users.find(us => us.email === email);
-  }
 }
