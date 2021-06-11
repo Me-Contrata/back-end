@@ -1,8 +1,6 @@
-import { Expose, Exclude } from "class-transformer";
-import { IsNotEmpty, Equals } from "class-validator";
+import { IsNotEmpty } from "class-validator";
 import {Match} from '../../common/decorators/validation.decorator'
 
-@Expose()
 export class UserInterface {
     @IsNotEmpty()
     name?: string;
@@ -15,7 +13,6 @@ export class UserInterface {
 
     @IsNotEmpty()
     @Match('password', {message: 'field confirmPassword must match with password field'})
-    @Exclude()
     confirmPassword?: string;
 
     github?: string

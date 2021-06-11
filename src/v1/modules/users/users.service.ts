@@ -25,25 +25,20 @@ export class UsersService {
   async login(user: LoginPayload) {
     let userResponse = await this.getByEmail(user);
 
+    if(!userResponse) {
+        throw new NotFoundException('user not found');
+    }
+
     let isPasswordValid = await this.authService.comparePasswords(user.password, userResponse.password);
 
-    if(!userResponse || !isPasswordValid) {
-        throw new NotFoundException('user not found');
+    if(!isPasswordValid) {
+      throw new NotFoundException('user not found');
     }
 
     return {
         auth_token: await this.authService.generateJWT(userResponse)
     }
 }
-
-  // findOne(id: number): Observable<UserInterface> {
-  //   return from(this.userRepository.findOne({id})).pipe(
-  //       map((user: UserInterface) => {
-  //           const {password, ...result} = user;
-  //           return result;
-  //       } )
-  //   )
-  // }
 
   create(user:UserInterface): Observable<UserInterface> {
       return this.authService.hashPassword(user.password).pipe(
