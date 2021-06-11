@@ -1,15 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, Unique, BeforeInsert } from 'typeorm';
 import {Project} from '../projects/projects.entity';
-import { UserDto } from './dto/user.dto';
 
 @Entity()
 @Unique(['email'])
 export class User {
 
-  constructor(partial: Partial<UserDto>) {
-    Object.assign(this, partial);
-  }
-  
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -33,6 +28,11 @@ export class User {
 
   @UpdateDateColumn({ type: 'timestamp' })
   updated_at: Date;
+
+  @BeforeInsert()
+  emailToLowerCase() {
+    this.email = this.email.toLowerCase();
+  }
 
   @OneToMany(() => Project, project => project.user)
   project: Project;

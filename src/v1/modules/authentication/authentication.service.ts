@@ -1,26 +1,23 @@
-import {LoginPayload} from './dto/login-payload.dto';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import {UsersService} from '../users/users.service'
+import {Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
+import { Observable, from, of } from 'rxjs';
 
 @Injectable()
 export class AuthenticationService {
     constructor(
-        private readonly userService:UsersService,
         private jwtService:JwtService
     ) {}
 
-    async login(user: LoginPayload) {
-        let userResponse = await this.userService.getEmailAndPassword(user);
+    generateJWT(payload: Object): Promise<string> {
+        return this.jwtService.signAsync({user: payload});
+    }
 
-        console.log(userResponse);
+    hashPassword(password: string): Observable <string> {
+        return from<Promise<string>>(bcrypt.hash(password, 12));
+    }
 
-        if(!userResponse) {
-            throw new NotFoundException('user not found');
-        }
-
-        return {
-            auth_token: this.jwtService.sign({user: userResponse.email, id: userResponse.id, name: userResponse.name})
-        }
+    async comparePasswords(password: string, storedPasswordHash: string): Promise<boolean> {
+        return await bcrypt.compare(password, storedPasswordHash);
     }
 }

@@ -5,10 +5,8 @@ import { UsersModule } from './modules/users/users.module';
 import { AuthorizationModule } from './modules/authorization/authorization.module';
 import { AuthenticationController } from './modules/authentication/authentication.controller';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
-import { AuthenticationService } from './modules/authentication/authentication.service';
 import { ProjectsController } from './modules/projects/projects.controller';
 import { ProjectsModule } from './modules/projects/projects.module';
-import { ProjectsService } from './modules/projects/projects.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -26,6 +24,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
             password: configService.get('DATABASE_PASSWORD'),
             database: configService.get('DATABASE'),
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
+            logging: true,
             synchronize: true,
         })
       }
@@ -40,7 +39,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     })
   ],
   controllers: [AppController, AuthenticationController, ProjectsController],
-  providers: [AppService, AuthenticationService, ProjectsService]
+  providers: [AppService]
 })
 
 export class AppModule {}

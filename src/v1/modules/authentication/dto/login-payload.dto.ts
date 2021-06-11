@@ -8,5 +8,5 @@ export class LoginPayload {
     @IsNotEmpty()
     password: string;
 
-    is_active: boolean;
+    is_active?: boolean;
 }
