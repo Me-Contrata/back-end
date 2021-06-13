@@ -18,6 +18,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
             throw new UnauthorizedException();
         }
 
-        return user;
+        return {
+            auth_token: await this.authService.generateJWT(user)
+        }
     }
 }
