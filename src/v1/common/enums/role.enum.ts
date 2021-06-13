@@ -1,4 +1,5 @@
 export enum Role {
     Aventureiro = 'aventureiro',
-    Explorador = 'explorador',
+    Desafiador = 'desafiador',
+    Recrutador = 'recrutador',
 }

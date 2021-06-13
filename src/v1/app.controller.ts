@@ -11,7 +11,7 @@ export class AppController {
 
   @UseGuards(JwtGuard)
   @Post('/')
-  @Roles(Role.Explorador)
+  @Roles(Role.Desafiador)
   getStatus(@Req() request: Request): Object {
     return {'status': 'it\'s working'};
   }

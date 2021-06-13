@@ -29,8 +29,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         })
       }
     ),
-    UsersModule, 
-    AuthorizationModule, 
+    UsersModule,
     AuthenticationModule, 
     ProjectsModule, 
     JwtModule.register({

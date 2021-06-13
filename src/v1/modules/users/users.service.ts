@@ -16,14 +16,14 @@ export class UsersService {
     private authService: AuthenticationService
   ){}
 
-  getByEmail(userLogin:LoginPayload): Promise<User|null> {
+  getByEmail(email:string): Promise<User|null> {
     return this.userRepository.findOne({
-      email: userLogin.email
+      email: email
     });
   }
 
   async login(user: LoginPayload) {
-    let userResponse = await this.getByEmail(user);
+    let userResponse = await this.getByEmail(user.email);
 
     if(!userResponse) {
         throw new NotFoundException('user not found');
