@@ -15,7 +15,6 @@ export class UserInterface {
     @Match('password', {message: 'field confirmPassword must match with password field'})
     confirmPassword?: string;
 
-    github?: string
     is_active?: boolean;
     created_at?: Date;
     updated_at?: Date;

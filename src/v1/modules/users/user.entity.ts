@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, Unique, BeforeInsert } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn, Unique, BeforeInsert, Table } from 'typeorm';
 import {Project} from '../projects/projects.entity';
 
-@Entity()
+@Entity({name: 'users'})
 @Unique(['email'])
 export class User {
 
@@ -17,17 +17,8 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
-  github: string;
-
   @Column({ default: true })
   is_active: boolean;
-
-  @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
-
-  @UpdateDateColumn({ type: 'timestamp' })
-  updated_at: Date;
 
   @BeforeInsert()
   emailToLowerCase() {

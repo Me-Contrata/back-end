@@ -10,7 +10,7 @@ export class AuthenticationService {
     ) {}
 
     generateJWT(payload: Object): Promise<string> {
-        return this.jwtService.signAsync({user: payload});
+        return this.jwtService.signAsync({payload});
     }
 
     hashPassword(password: string): Observable <string> {

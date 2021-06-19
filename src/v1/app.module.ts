@@ -13,22 +13,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [  
     ConfigModule.forRoot(),
-    TypeOrmModule.forRootAsync({
-        imports: [ConfigModule],
-        inject: [ConfigService],
-        useFactory: (configService: ConfigService) => ({
-            type: 'postgres',
-            host: configService.get('HOST'),
-            port: +configService.get<number>('PORT'),
-            username: configService.get('DATABASE_USERNAME'),
-            password: configService.get('DATABASE_PASSWORD'),
-            database: configService.get('DATABASE'),
-            entities: [__dirname + '/**/*.entity{.ts,.js}'],
-            logging: true,
-            synchronize: true,
-        })
-      }
-    ),
+    TypeOrmModule.forRoot(),
     UsersModule,
     AuthenticationModule, 
     ProjectsModule, 

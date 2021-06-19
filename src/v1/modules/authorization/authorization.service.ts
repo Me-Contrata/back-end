@@ -13,6 +13,6 @@ export class AuthorizationService {
         //   const { ...result } = user;
         //   return result;
         // }
-        return null;
+        return true;
     }
 }

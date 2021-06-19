@@ -18,7 +18,8 @@ export class UsersService {
 
   getByEmail(email:string): Promise<User|null> {
     return this.userRepository.findOne({
-      email: email
+      email: email,
+      is_active: true
     });
   }
 
@@ -29,7 +30,6 @@ export class UsersService {
 
           newUser.email = user.email;
           newUser.name = user.name;
-          newUser.github = user.github;
           newUser.password = passwordString;
 
           return from(this.userRepository.save(newUser)).pipe(
